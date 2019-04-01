@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.TbSeriesMapper" >
+  <resultMap id="BaseResultMap" type="com.po.TbSeries" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="series_code" property="seriesCode" jdbcType="VARCHAR" />
+    <result column="series_name" property="seriesName" jdbcType="VARCHAR" />
+    <result column="brand_code" property="brandCode" jdbcType="VARCHAR" />
+    <result column="date_create" property="dateCreate" jdbcType="TIMESTAMP" />
+    <result column="date_update" property="dateUpdate" jdbcType="TIMESTAMP" />
+    <result column="en_name" property="enName" jdbcType="VARCHAR" />
+    <result column="alias_name" property="aliasName" jdbcType="VARCHAR" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="is_import" property="isImport" jdbcType="BIT" />
+    <result column="is_hidden" property="isHidden" jdbcType="BIT" />
+    <result column="display_tag" property="displayTag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, series_code, series_name, brand_code, date_create, date_update, en_name, alias_name, 
+    image_url, is_import, is_hidden, display_tag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.po.TbSeriesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_series
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_series
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_series
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.po.TbSeriesExample" >
+    delete from tb_series
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.po.TbSeries" >
+    insert into tb_series (id, series_code, series_name, 
+      brand_code, date_create, date_update, 
+      en_name, alias_name, image_url, 
+      is_import, is_hidden, display_tag
+      )
+    values (#{id,jdbcType=INTEGER}, #{seriesCode,jdbcType=VARCHAR}, #{seriesName,jdbcType=VARCHAR}, 
+      #{brandCode,jdbcType=VARCHAR}, #{dateCreate,jdbcType=TIMESTAMP}, #{dateUpdate,jdbcType=TIMESTAMP}, 
+      #{enName,jdbcType=VARCHAR}, #{aliasName,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
+      #{isImport,jdbcType=BIT}, #{isHidden,jdbcType=BIT}, #{displayTag,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.po.TbSeries" >
+    insert into tb_series
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="seriesCode != null" >
+        series_code,
+      </if>
+      <if test="seriesName != null" >
+        series_name,
+      </if>
+      <if test="brandCode != null" >
+        brand_code,
+      </if>
+      <if test="dateCreate != null" >
+        date_create,
+      </if>
+      <if test="dateUpdate != null" >
+        date_update,
+      </if>
+      <if test="enName != null" >
+        en_name,
+      </if>
+      <if test="aliasName != null" >
+        alias_name,
+      </if>
+      <if test="imageUrl != null" >
+        image_url,
+      </if>
+      <if test="isImport != null" >
+        is_import,
+      </if>
+      <if test="isHidden != null" >
+        is_hidden,
+      </if>
+      <if test="displayTag != null" >
+        display_tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="seriesCode != null" >
+        #{seriesCode,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesName != null" >
+        #{seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandCode != null" >
+        #{brandCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dateCreate != null" >
+        #{dateCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateUpdate != null" >
+        #{dateUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enName != null" >
+        #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="aliasName != null" >
+        #{aliasName,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isImport != null" >
+        #{isImport,jdbcType=BIT},
+      </if>
+      <if test="isHidden != null" >
+        #{isHidden,jdbcType=BIT},
+      </if>
+      <if test="displayTag != null" >
+        #{displayTag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.po.TbSeriesExample" resultType="java.lang.Integer" >
+    select count(*) from tb_series
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_series
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.seriesCode != null" >
+        series_code = #{record.seriesCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seriesName != null" >
+        series_name = #{record.seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandCode != null" >
+        brand_code = #{record.brandCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dateCreate != null" >
+        date_create = #{record.dateCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dateUpdate != null" >
+        date_update = #{record.dateUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enName != null" >
+        en_name = #{record.enName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aliasName != null" >
+        alias_name = #{record.aliasName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageUrl != null" >
+        image_url = #{record.imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isImport != null" >
+        is_import = #{record.isImport,jdbcType=BIT},
+      </if>
+      <if test="record.isHidden != null" >
+        is_hidden = #{record.isHidden,jdbcType=BIT},
+      </if>
+      <if test="record.displayTag != null" >
+        display_tag = #{record.displayTag,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_series
+    set id = #{record.id,jdbcType=INTEGER},
+      series_code = #{record.seriesCode,jdbcType=VARCHAR},
+      series_name = #{record.seriesName,jdbcType=VARCHAR},
+      brand_code = #{record.brandCode,jdbcType=VARCHAR},
+      date_create = #{record.dateCreate,jdbcType=TIMESTAMP},
+      date_update = #{record.dateUpdate,jdbcType=TIMESTAMP},
+      en_name = #{record.enName,jdbcType=VARCHAR},
+      alias_name = #{record.aliasName,jdbcType=VARCHAR},
+      image_url = #{record.imageUrl,jdbcType=VARCHAR},
+      is_import = #{record.isImport,jdbcType=BIT},
+      is_hidden = #{record.isHidden,jdbcType=BIT},
+      display_tag = #{record.displayTag,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.po.TbSeries" >
+    update tb_series
+    <set >
+      <if test="seriesCode != null" >
+        series_code = #{seriesCode,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesName != null" >
+        series_name = #{seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandCode != null" >
+        brand_code = #{brandCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dateCreate != null" >
+        date_create = #{dateCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateUpdate != null" >
+        date_update = #{dateUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enName != null" >
+        en_name = #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="aliasName != null" >
+        alias_name = #{aliasName,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isImport != null" >
+        is_import = #{isImport,jdbcType=BIT},
+      </if>
+      <if test="isHidden != null" >
+        is_hidden = #{isHidden,jdbcType=BIT},
+      </if>
+      <if test="displayTag != null" >
+        display_tag = #{displayTag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.po.TbSeries" >
+    update tb_series
+    set series_code = #{seriesCode,jdbcType=VARCHAR},
+      series_name = #{seriesName,jdbcType=VARCHAR},
+      brand_code = #{brandCode,jdbcType=VARCHAR},
+      date_create = #{dateCreate,jdbcType=TIMESTAMP},
+      date_update = #{dateUpdate,jdbcType=TIMESTAMP},
+      en_name = #{enName,jdbcType=VARCHAR},
+      alias_name = #{aliasName,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      is_import = #{isImport,jdbcType=BIT},
+      is_hidden = #{isHidden,jdbcType=BIT},
+      display_tag = #{displayTag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
