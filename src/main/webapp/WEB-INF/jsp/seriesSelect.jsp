@@ -7,6 +7,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 <head>
@@ -23,7 +24,7 @@
         <td>是否进口：</td>
         <td>操作：</td>
     </tr>
-    <c:forEach tbSeries="${tbSeriesList }" var="tbSeries">
+    <c:forEach items="${httpServletRequest.tbSeriesList }" var="tbSeries">
     <tr>
         <td><input type="checkbox" name="tbSeries_id" value="${tbSeries.id}"/></td>
         <td>${tbSeries.imageUrl }</td>

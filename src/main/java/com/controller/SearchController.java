@@ -27,12 +27,12 @@ public class SearchController {
 			//调用service查询商品信息
 			List<TbSeries> tbSeriesList = (List<TbSeries>)service.selectBySeriesname("series_name");
 
-				model.addAttribute("tbSeriesList", tbSeriesList);
-				return "redirect:seriesSelect";
+			httpServletRequest.setAttribute("tbSeriesList", tbSeriesList);
+				return "seriesSelect";
 
 		}
-		
-		
+
+
 
 		@RequestMapping("/selectByModelname")
 		public 	String selectByModelname(Model model,String model_name)throws Exception{

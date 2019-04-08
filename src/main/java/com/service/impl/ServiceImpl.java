@@ -25,10 +25,8 @@ public class ServiceImpl implements Service {
 
 	public List<TbSeries> selectBySeriesname( String series_name) throws Exception {
         TbSeriesExample.Criteria criteria = (TbSeriesExample.Criteria) tbSeriesExample.createCriteria();
-        if (criteria != null) {
-            criteria.andSeriesNameLike("series_name");
-            return null;}
 
+            criteria.andSeriesNameLike("series_name");
             return tbSeriesMapper.selectByExample(tbSeriesExample);
 
 	}
