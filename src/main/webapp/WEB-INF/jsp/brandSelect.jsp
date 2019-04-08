@@ -40,7 +40,7 @@
         简称: <input type="text" name="short_name" /> <br>
         进口方式: <input type="text" name="import_type" /> <br>
         是否平行进口: <input type="text" name="is_import" /> <br>
-        <input type="submit" value="查看具体车系" onclick="onclick();" />
+        <input type="submit" value="查看具体车系" onclick="a();" />
     </form>
 
 </body>

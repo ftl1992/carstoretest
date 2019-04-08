@@ -1,6 +1,8 @@
 package com.controller;
 
 
+import com.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,37 +11,25 @@ import com.po.TbBrand;
 import com.po.TbModel;
 import com.po.TbSeries;
 import com.service.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
 @RequestMapping("/select")
 public class SearchController {
-		private Service service;
-
+		@Autowired
+		private Service service=new ServiceImpl();
 		@RequestMapping("/selectBySeriesname")
-		public String selectBySeriesname(Model model, String series_name) throws Exception{
-			
+		public String selectBySeriesname(HttpServletRequest httpServletRequest, Model model ) throws Exception{
+			String series_name = (String)httpServletRequest.getParameter("series_name");
 			//调用service查询商品信息
-			List<TbSeries> tbSeriesList = service.selectBySeriesname(series_name);
-			if (tbSeriesList!=null && !tbSeriesList.isEmpty()) {
+			List<TbSeries> tbSeriesList = (List<TbSeries>)service.selectBySeriesname("series_name");
+
 				model.addAttribute("tbSeriesList", tbSeriesList);
-				return "seriesSelect";
-			}
-			else {
-				String en_name=series_name;
-				tbSeriesList.addAll(service.selectByEname(en_name)) ;
-				if (tbSeriesList!=null && !tbSeriesList.isEmpty()) {
-					model.addAttribute("tbSeriesList", tbSeriesList);
-					return "seriesSelect";
-				}
-				else {
-					String alias_name=series_name;
-					tbSeriesList.addAll( service.selectAname(alias_name));
-					model.addAttribute("tbSeriesList", tbSeriesList);
-					return "seriesSelect";
-				}
-			}
+				return "redirect:seriesSelect";
+
 		}
 		
 		
@@ -122,7 +112,6 @@ public class SearchController {
 				}
 				}
 			}
-
 		}
 
 

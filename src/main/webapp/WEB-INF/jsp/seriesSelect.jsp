@@ -5,7 +5,8 @@
   Time: 13:56
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8"%>
 
 <html>
 <head>
@@ -34,13 +35,6 @@
 
     </tr>
     </c:forEach>
-<form action="${pageContext.request.contextPath }/select/selectByBrandname" method="post">
-    车系图片: <input type="text" name="image_url" /> <br>
-    车系: <input type="text" name="series_name" /> <br>
-    英文名: <input type="text" name="en_name" /> <br>
-    是否进口: <input type="text" name="is_import" /> <br>
-    <input type="submit" value="查看具体车型" onclick="onclick();" />
-</form>
 
 </body>
 </html>

@@ -1,43 +1,65 @@
-<%@ page contentType="text/html; charset=UTF-8"  %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8"%>
 <html lang="fan">
 <head>
     <meta charset="utf-8" />
     <title>首页 - carstore</title>
 
+    <script language="JavaScript">
+        function a(str){ //删除左右两端的空格
+            return str.replace(/(^\s*)|(\s*$)/g, "");
+        }
+        function ss(){
+            alert("进入");
+            var brand_name = document.getElementById("brand_name");
+            var series_name = document.getElementById("series_name");
+            var model_name = document.getElementById("model_name");
+            if( a(model_name.value)!=null && a(model_name.value)!=="")
+            {
+
+                document.carForm.action="${pageContext.request.contextPath }/select/selectByModelname";
+                document.carForm.submit();
+                alert("成功");
+            }
+            if(a(series_name.value)!=null && a(series_name.value)!=="")
+            {
+                alert("成功");
+                document.carForm.action="${pageContext.request.contextPath }/select/selectBySeriesname";
+                document.carForm.submit();
+
+            }
+            if( a(brand_name.value)!=null && a(brand_name.value)!=="")
+            {
+                document.carForm.action="${pageContext.request.contextPath }/select/selectByBrandname";
+                document.carForm.submit();
+                alert("成功");
+            }
+        }
+
+    </script>
 </head>
 <body>
-<form name="carForm"  method="post">
+<form id="carForm" name="carForm" method="post" >
     <table width="100%" border=1>
-    品牌: <input type="text" name="brand_name" /> <br>
-    车系: <input type="text" name="series_name" /> <br>
-    车型: <input type="text" name="model_name" /> <br>
-    <input type="submit" value="查询" onclick="onclick();" />
+        <tr>
+            <td>品牌</td>
+            <td><input type="text" name="brand_name" id="brand_name"/></td>
+        </tr>
+        <tr>
+            <td>车系</td>
+            <td><input type="text" name="series_name" id="series_name"/></td>
+        </tr>
+        <tr>
+            <td>车型</td>
+            <td><input type="text" name="model_name" id="model_name"/></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><input type="submit" value="查询" onclick="ss()"/>
+            </td>
+        </tr>
+
     </table>
 </form>
 
-<script type="text/javascript">
-
-    function onclick(){
-        if('${model}'!=null && '${model}'!='')
-    {
-
-        document.carForm.action="${pageContext.request.contextPath }/select/selectByModelname";
-        document.carForm.submit();
-        return;
-    }
-        if('${series}'!=null && '${series}'!='')
-        {
-            document.carForm.action="${pageContext.request.contextPath }/select/selectBySeriesname";
-            document.carForm.submit();
-            return;
-        }
-        if('${brand}'!=null && '${brand}'!='')
-        {
-            document.carForm.action="${pageContext.request.contextPath }/select/selectByBrandname";
-            document.carForm.submit();
-            return;
-        }
-    }
-</script>
 </body>
 </html>
