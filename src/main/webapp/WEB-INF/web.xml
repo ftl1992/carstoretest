@@ -42,15 +42,15 @@ http://java.sun.com/xml/ns/javaee "
 
   <!-- post乱码过虑器 -->
   <filter>
-    <filter-name>charsetEncodingFilter</filter-name>
-    <filter-class>com.filter.CharsetEncodingFilter</filter-class>
-        <init-param>
-          <param-name>encode</param-name>
-          <param-value>utf-8</param-value>
-        </init-param>
+    <filter-name>characterEncoding</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter </filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
   </filter>
   <filter-mapping>
-    <filter-name>charsetEncodingFilter</filter-name>
+    <filter-name>characterEncoding</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   <welcome-file-list>

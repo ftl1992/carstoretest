@@ -48,8 +48,7 @@ public class SearchController {
 		}
 
 	@RequestMapping("/selectByBrandname")
-	public ModelAndView selectByBrandname(Model model, HttpServletResponse response, String brand_name) throws Exception{
-		response.setCharacterEncoding("UTF-8");
+	public ModelAndView selectByBrandname(Model model,String brand_name) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 
 		System.out.print(brand_name.toString());
