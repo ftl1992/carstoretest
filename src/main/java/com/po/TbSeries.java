@@ -122,4 +122,5 @@ public class TbSeries {
     public void setDisplayTag(Integer displayTag) {
         this.displayTag = displayTag;
     }
+
 }

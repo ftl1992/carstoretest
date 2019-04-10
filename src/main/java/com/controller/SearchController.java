@@ -12,32 +12,88 @@ import com.po.TbModel;
 import com.po.TbSeries;
 import com.service.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/select")
 public class SearchController {
 		@Autowired
 		private Service service=new ServiceImpl();
-		@RequestMapping("/selectBySeriesname")
-		public String selectBySeriesname(HttpServletRequest httpServletRequest, Model model ) throws Exception{
-			String series_name = (String)httpServletRequest.getParameter("series_name");
-			//µ÷ÓÃservice²éÑ¯ÉÌÆ·ÐÅÏ¢
-			List<TbSeries> tbSeriesList = (List<TbSeries>)service.selectBySeriesname("series_name");
 
-			httpServletRequest.setAttribute("tbSeriesList", tbSeriesList);
-				return "seriesSelect";
+		@RequestMapping("/selectBySeriesname")
+		public ModelAndView selectBySeriesname( String series_name ) throws Exception{
+			System.out.print(series_name);
+			//ï¿½ï¿½ï¿½ï¿½serviceï¿½ï¿½Ñ¯ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
+			List<TbSeries> tbSeriesList = (List<TbSeries>)service.selectBySeriesname(series_name);
+			// ï¿½ï¿½ï¿½ï¿½ModelAndView
+			ModelAndView modelAndView = new ModelAndView();
+			// ï¿½àµ± ï¿½ï¿½requestï¿½ï¿½setAttributï¿½ï¿½ï¿½ï¿½jspÒ³ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½itemsListÈ¡ï¿½ï¿½ï¿½ï¿½
+            modelAndView.clear();
+			modelAndView.addObject("tbSeriesList", tbSeriesList);
+
+			// Ö¸ï¿½ï¿½ï¿½ï¿½Í¼
+			// ï¿½Â±ßµï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½jspÂ·ï¿½ï¿½ï¿½ï¿½Ç°×ºï¿½ï¿½jspÂ·ï¿½ï¿½ï¿½Äºï¿½×ºï¿½ï¿½ï¿½Þ¸ï¿½Îª
+			// modelAndView.setViewName("/WEB-INF/jsp/items/itemsList.jsp");
+			// ï¿½Ï±ßµï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½Ô²ï¿½ï¿½Ú³ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½jspÂ·ï¿½ï¿½ï¿½ï¿½Ç°×ºï¿½ï¿½jspÂ·ï¿½ï¿½ï¿½Äºï¿½×º
+			modelAndView.setViewName("seriesSelect");
+
+			return modelAndView;
+
 
 		}
 
+	@RequestMapping("/selectByBrandname")
+	public ModelAndView selectByBrandname(Model model, HttpServletResponse response, String brand_name) throws Exception{
+		response.setCharacterEncoding("UTF-8");
+		ModelAndView modelAndView = new ModelAndView();
 
+		System.out.print(brand_name.toString());
+		//ï¿½ï¿½ï¿½ï¿½serviceï¿½ï¿½Ñ¯ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
+		List<TbBrand>  tbBrandList = service.selectByBrandname(brand_name);
+
+		if (tbBrandList!=null && !tbBrandList.isEmpty()) {
+			modelAndView.clear();
+			modelAndView.addObject("tbBrandList", tbBrandList);
+			modelAndView.setViewName("seriesSelect");
+			return modelAndView;
+		}
+		else {
+			String en_name=brand_name;
+			tbBrandList.addAll(service.selectByEnameBrand(en_name));
+			if (tbBrandList!=null && !tbBrandList.isEmpty()) {
+				model.addAttribute("tbBrandList", tbBrandList);
+
+			}
+			else {
+				String alias_name=en_name;
+				tbBrandList.addAll(service.selectAnameBrand(alias_name));
+				if (tbBrandList!=null && !tbBrandList.isEmpty()) {
+					model.addAttribute("tbBrandList", tbBrandList);
+
+				}
+				else {
+					String pinyin=alias_name;
+					tbBrandList.addAll(service.selectPinyin(pinyin));
+					model.addAttribute("tbBrandList", tbBrandList);
+
+				}
+			}
+		}
+		modelAndView.clear();
+		modelAndView.addObject("tbBrandList", tbBrandList);
+		modelAndView.setViewName("seriesSelect");
+		return modelAndView;
+	}
 
 		@RequestMapping("/selectByModelname")
 		public 	String selectByModelname(Model model,String model_name)throws Exception{
 			
-			//µ÷ÓÃservice²éÑ¯ÉÌÆ·ÐÅÏ¢
+			//ï¿½ï¿½ï¿½ï¿½serviceï¿½ï¿½Ñ¯ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 			List<TbModel> tbModelList = service.selectByModelname(model_name);
 			if (tbModelList!=null && !tbModelList.isEmpty()) {
 
@@ -53,10 +109,11 @@ public class SearchController {
 			}
 		}
 		@RequestMapping("/selectByBrand_code")
-				public 	String selectByBrand_code(Model model,TbBrand tbBrand){
+				public 	String selectByBrand_code(Model model,@RequestParam(value = "brandCode",required = true) String brand_code){
+			System.out.print(brand_code);
 			List<TbSeries> tbSeriesList = null;
 			try {
-				tbSeriesList = service.selectByBrand_code(tbBrand.getBrandCode());
+				tbSeriesList = service.selectByBrand_code(brand_code);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -65,10 +122,11 @@ public class SearchController {
 		}
 
 	@RequestMapping("/selectBySeries_code")
-	public 	String selectBySeries_code(Model model,TbSeries tbSeries){
+	public 	String selectBySeries_code(Model model,@RequestParam(value = "seriesCode",required = true) String series_code){
+		System.out.print(series_code);
 		List<TbModel> tbModelList = null;
 		try {
-			tbModelList = service.selectBySeries_code(tbSeries.getSeriesCode());
+			tbModelList = service.selectBySeries_code(series_code);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -79,39 +137,7 @@ public class SearchController {
 
 
 
-		@RequestMapping("/selectByBrandname")
-		public String selectByBrandname(Model model,String brand_name) throws Exception{
-			
-			//µ÷ÓÃservice²éÑ¯ÉÌÆ·ÐÅÏ¢
-			List<TbBrand>  tbBrandList = service.selectByBrandname(brand_name);
-			if (tbBrandList!=null && !tbBrandList.isEmpty()) {
-				model.addAttribute("tbBrandList", tbBrandList);
 
-				return "brandSelect";
-			}
-			else {
-				String en_name=brand_name;
-				tbBrandList.addAll(service.selectByEnameBrand(en_name));
-				if (tbBrandList!=null && !tbBrandList.isEmpty()) {
-					model.addAttribute("tbBrandList", tbBrandList);
-					return "brandSelect";
-				}
-				else {
-					String alias_name=en_name;
-					tbBrandList.addAll(service.selectAnameBrand(alias_name));
-					if (tbBrandList!=null && !tbBrandList.isEmpty()) {
-						model.addAttribute("tbBrandList", tbBrandList);
-						return "brandSelect";
-					}
-					else {
-						String pinyin=alias_name;
-						tbBrandList.addAll(service.selectPinyin(pinyin));
-						model.addAttribute("tbBrandList", tbBrandList);
-						return "brandSelect";
-					}
-				}
-				}
-			}
 		}
 
 

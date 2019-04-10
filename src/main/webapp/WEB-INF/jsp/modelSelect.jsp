@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -11,6 +12,7 @@
     <title>车型表</title>
 </head>
 <body>
+<form name="modelForm" method="post">
     车型列表：
     <table width="100%" border=1>
         <tr>
@@ -22,27 +24,18 @@
             <td>进口方式：</td>
             <td>是否平行进口：</td>
         </tr>
-        <c:forEach tbSeries="${tbModelList }" var="tbModel">
+        <c:forEach items="${tbModelList }" var="tbModel">
         <tr>
             <td><input type="checkbox" name="tbModel_id" value="${tbModel.id}"/></td>
-            <td>${tbModel.lead_pic }</td>
-            <td>${tbModel.model_name }</td>
+            <td>${tbModel.leadPic }</td>
+            <td>${tbModel.modelName }</td>
             <td>${tbModel.year }</td>
-            <td>${tbModel.short_name }</td>
-            <td>${tbModel.import_type }</td>
-            <td>${tbModel.is_import }</td>
-
+            <td>${tbModel.shortName }</td>
+            <td>${tbModel.importType }</td>
+            <td>${tbModel.isImport }</td>
         </tr>
-        <a href="">返回主页</a>
         </c:forEach>
-        <form method="post">
-            车型: <input type="text" name="lead_pic" /> <br>
-            车型名称: <input type="text" name="model_name" /> <br>
-            年份: <input type="text" name="year" /> <br>
-            简称: <input type="text" name="short_name" /> <br>
-            进口方式: <input type="text" name="import_type" /> <br>
-            是否平行进口: <input type="text" name="is_import" /> <br>
+        <a href="../index.jsp">返回主页</a>
         </form>
-
 </body>
 </html>

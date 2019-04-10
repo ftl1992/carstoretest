@@ -39,6 +39,20 @@ http://java.sun.com/xml/ns/javaee "
     <filter-name>HiddenHttpMethodFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
+  <!-- post乱码过虑器 -->
+  <filter>
+    <filter-name>charsetEncodingFilter</filter-name>
+    <filter-class>com.filter.CharsetEncodingFilter</filter-class>
+        <init-param>
+          <param-name>encode</param-name>
+          <param-value>utf-8</param-value>
+        </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>charsetEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
