@@ -6,7 +6,7 @@
   Time: 9:20
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="UTF-8"%>
 <html>
 <head>
@@ -25,7 +25,7 @@
     </tr>
     <c:forEach items="${tbBrandList }" var="tbBrand">
     <tr>
-        <td><input type="checkbox" value="${tbBrand.id}"/></td>
+        <td><input type="checkbox" name="tbBrand" value="${tbBrand.id}"/></td>
         <td>${tbBrand.logoUrl }</td>
         <td>${tbBrand.brandName }</td>
         <td>${tbBrand.country }</td>

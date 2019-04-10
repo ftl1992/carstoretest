@@ -51,42 +51,46 @@ public class SearchController {
 	public ModelAndView selectByBrandname(Model model,String brand_name) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 
-		System.out.print(brand_name.toString());
+		System.out.print(brand_name);
 		//����service��ѯ��Ʒ��Ϣ
 		List<TbBrand>  tbBrandList = service.selectByBrandname(brand_name);
 
-		if (tbBrandList!=null && !tbBrandList.isEmpty()) {
+		if (!tbBrandList.isEmpty()) {
 			modelAndView.clear();
 			modelAndView.addObject("tbBrandList", tbBrandList);
 			modelAndView.setViewName("seriesSelect");
 			return modelAndView;
 		}
 		else {
-			String en_name=brand_name;
+			String en_name=brand_name.toString();
 			tbBrandList.addAll(service.selectByEnameBrand(en_name));
-			if (tbBrandList!=null && !tbBrandList.isEmpty()) {
+			if ( !tbBrandList.isEmpty()) {
+                modelAndView.clear();
 				model.addAttribute("tbBrandList", tbBrandList);
-
+                modelAndView.setViewName("seriesSelect");
+                return modelAndView;
 			}
 			else {
-				String alias_name=en_name;
+				String alias_name=en_name.toString();
 				tbBrandList.addAll(service.selectAnameBrand(alias_name));
-				if (tbBrandList!=null && !tbBrandList.isEmpty()) {
+				if ( !tbBrandList.isEmpty()) {
+                    modelAndView.clear();
 					model.addAttribute("tbBrandList", tbBrandList);
-
+                    modelAndView.setViewName("seriesSelect");
+                    return modelAndView;
 				}
 				else {
-					String pinyin=alias_name;
+					String pinyin=alias_name.toString();
 					tbBrandList.addAll(service.selectPinyin(pinyin));
+                    modelAndView.clear();
 					model.addAttribute("tbBrandList", tbBrandList);
-
+                    modelAndView.setViewName("seriesSelect");
+                    return modelAndView;
 				}
 			}
 		}
-		modelAndView.clear();
-		modelAndView.addObject("tbBrandList", tbBrandList);
-		modelAndView.setViewName("seriesSelect");
-		return modelAndView;
+
+
 	}
 
 		@RequestMapping("/selectByModelname")
