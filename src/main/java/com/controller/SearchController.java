@@ -55,33 +55,36 @@ public class SearchController {
 		//����service��ѯ��Ʒ��Ϣ
 		List<TbBrand>  tbBrandList = service.selectByBrandname(brand_name);
 
-		if (!tbBrandList.isEmpty()) {
+		if (tbBrandList!=null&&tbBrandList.size()!=0) {
 			modelAndView.clear();
 			modelAndView.addObject("tbBrandList", tbBrandList);
 			modelAndView.setViewName("seriesSelect");
 			return modelAndView;
 		}
 		else {
-			String en_name=brand_name.toString();
-			tbBrandList.addAll(service.selectByEnameBrand(en_name));
-			if ( !tbBrandList.isEmpty()) {
+			assert tbBrandList != null;
+			tbBrandList.addAll(service.selectByEnameBrand(brand_name));
+
+
+			if ( tbBrandList.size()!=0) {
                 modelAndView.clear();
 				model.addAttribute("tbBrandList", tbBrandList);
                 modelAndView.setViewName("seriesSelect");
                 return modelAndView;
 			}
 			else {
-				String alias_name=en_name.toString();
-				tbBrandList.addAll(service.selectAnameBrand(alias_name));
-				if ( !tbBrandList.isEmpty()) {
+				tbBrandList.addAll(service.selectAnameBrand(brand_name));
+
+				if ( tbBrandList.size()!=0) {
                     modelAndView.clear();
 					model.addAttribute("tbBrandList", tbBrandList);
                     modelAndView.setViewName("seriesSelect");
                     return modelAndView;
 				}
 				else {
-					String pinyin=alias_name.toString();
-					tbBrandList.addAll(service.selectPinyin(pinyin));
+                    System.out.print(brand_name);
+					tbBrandList.addAll(service.selectPinyin(brand_name));
+
                     modelAndView.clear();
 					model.addAttribute("tbBrandList", tbBrandList);
                     modelAndView.setViewName("seriesSelect");
@@ -135,12 +138,5 @@ public class SearchController {
 		}
 		model.addAttribute("tbModelList",tbModelList);
 		return "modelSelect";
-	}
-
-
-
-
-
 		}
-
-
+	}
