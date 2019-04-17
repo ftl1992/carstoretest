@@ -28,6 +28,7 @@ public class SearchController {
 		@RequestMapping("/selectBySeriesname")
 		public ModelAndView selectBySeriesname( String series_name ) throws Exception{
 			System.out.print(series_name);
+
 			//����service��ѯ��Ʒ��Ϣ
 			List<TbSeries> tbSeriesList = (List<TbSeries>)service.selectBySeriesname(series_name);
 			// ����ModelAndView
