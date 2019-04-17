@@ -21,6 +21,20 @@ public class ServiceImpl implements Service {
     @Autowired
 	private TbModelMapper tbModelMapper;
 
+	@Override
+	public List<TbBrand> findByBrandname( String brand_name) throws Exception {
+		return tbBrandMapper.findByBrandname(brand_name);
+	}
+
+	@Override
+	public List<TbBrand> findAnameBrand(String alias_name) throws Exception {
+		return tbBrandMapper.findAnameBrand(alias_name);
+	}
+
+	@Override
+	public List<TbBrand> findPinyin(String pinyin) throws Exception {
+		return tbBrandMapper.findPinyin(pinyin);
+	}
 
 	@Override
 	public List<TbSeries> selectBySeriesname( String series_name) throws Exception {
@@ -62,7 +76,13 @@ public class ServiceImpl implements Service {
 		criteria.andSeriesCodeEqualTo(series_code);
 		return tbModelMapper.selectByExample(tbModelExample);
 	}
-    @Override
+
+	@Override
+	public List<TbBrand> findtByEnameBrand(String en_name) throws Exception {
+		return tbBrandMapper.findtByEnameBrand(en_name);
+	}
+
+	@Override
 	public List<TbBrand> selectByBrandname(String brand_name) throws Exception {
 		TbBrandExample.Criteria criteria=tbBrandExample.createCriteria();
 		criteria.andBrandNameLike("%"+brand_name+"%");

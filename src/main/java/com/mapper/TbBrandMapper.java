@@ -18,6 +18,10 @@ public interface TbBrandMapper {
     int insertSelective(TbBrand record);
 
     List<TbBrand> selectByExample(TbBrandExample example);
+    List<TbBrand> findByBrandname(String brand_name);
+    List<TbBrand> findtByEnameBrand(String en_name);
+    List<TbBrand> findAnameBrand(String alias_name);
+    List<TbBrand> findPinyin(String pinyin);
 
     TbBrand selectByPrimaryKey(Integer id);
 
@@ -28,4 +32,5 @@ public interface TbBrandMapper {
     int updateByPrimaryKeySelective(TbBrand record);
 
     int updateByPrimaryKey(TbBrand record);
+
 }

@@ -78,6 +78,44 @@
     id, brand_code, brand_name, date_create, date_update, logo_url, country, en_name, 
     pinyin, alias_name, is_hidden, hot, display_tag
   </sql>
+  <select id="findByBrandname" parameterType="String"
+          resultMap="BaseResultMap">
+  SELECT <include refid="Base_Column_List" /> FROM tb_brand
+  <where>
+    tb_brand.brand_name LIKE '%${_parameter}%'
+  </where>
+</select>
+
+
+  <select id="findtByEnameBrand" parameterType="String"
+          resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" /> FROM tb_brand
+      <where>
+      tb_brand.en_name LIKE '%${_parameter}%'
+      </where>
+
+  </select>
+
+
+  <select id="findAnameBrand" parameterType="String"
+          resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" /> FROM tb_brand
+    <where>
+      tb_brand.alias_name LIKE '%${_parameter}%'
+    </where>
+  </select>
+
+  <select id="findPinyin" parameterType="String"
+          resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" /> FROM tb_brand
+    <where>
+      tb_brand.pinyin  LIKE '%${_parameter}%'
+    </where>
+  </select>
+
+
+
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.po.TbBrandExample" >
     select
     <if test="distinct" >

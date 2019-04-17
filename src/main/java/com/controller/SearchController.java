@@ -51,43 +51,44 @@ public class SearchController {
 	public ModelAndView selectByBrandname(Model model,String brand_name) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 
+
 		System.out.print(brand_name);
 		//����service��ѯ��Ʒ��Ϣ
-		List<TbBrand>  tbBrandList = service.selectByBrandname(brand_name);
+		List<TbBrand>  tbBrandList = (List<TbBrand>)service.findByBrandname(brand_name);
 
 		if (tbBrandList!=null&&tbBrandList.size()!=0) {
 			modelAndView.clear();
 			modelAndView.addObject("tbBrandList", tbBrandList);
-			modelAndView.setViewName("seriesSelect");
+			modelAndView.setViewName("brandSelect");
 			return modelAndView;
 		}
 		else {
 			assert tbBrandList != null;
-			tbBrandList.addAll(service.selectByEnameBrand(brand_name));
+			tbBrandList.addAll(service.findtByEnameBrand(brand_name));
 
 
 			if ( tbBrandList.size()!=0) {
                 modelAndView.clear();
 				model.addAttribute("tbBrandList", tbBrandList);
-                modelAndView.setViewName("seriesSelect");
+                modelAndView.setViewName("brandSelect");
                 return modelAndView;
 			}
 			else {
-				tbBrandList.addAll(service.selectAnameBrand(brand_name));
+				tbBrandList.addAll(service.findAnameBrand(brand_name));
 
 				if ( tbBrandList.size()!=0) {
                     modelAndView.clear();
 					model.addAttribute("tbBrandList", tbBrandList);
-                    modelAndView.setViewName("seriesSelect");
+                    modelAndView.setViewName("brandSelect");
                     return modelAndView;
 				}
 				else {
                     System.out.print(brand_name);
-					tbBrandList.addAll(service.selectPinyin(brand_name));
+					tbBrandList.addAll(service.findPinyin(brand_name));
 
                     modelAndView.clear();
 					model.addAttribute("tbBrandList", tbBrandList);
-                    modelAndView.setViewName("seriesSelect");
+                    modelAndView.setViewName("brandSelect");
                     return modelAndView;
 				}
 			}
@@ -108,8 +109,8 @@ public class SearchController {
 				return "modelSelect";
 			}
 			else {
-				String short_name= model_name;
-				tbModelList.addAll(service.selectByShortname(short_name)) ;
+                assert tbModelList != null;
+                tbModelList.addAll(service.selectByShortname(model_name)) ;
 				model.addAttribute("tbModelList",tbModelList);
 				return "modelSelect";
 			}
