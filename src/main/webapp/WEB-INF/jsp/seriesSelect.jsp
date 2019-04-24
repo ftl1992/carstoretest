@@ -35,6 +35,7 @@
         <td>${tbSeries.isImport }</td>
         <td><a href="${pageContext.request.contextPath }/select/selectBySeries_code?seriesCode=${tbSeries.seriesCode}">查看具体车型</a></td>
         <td><a href="${pageContext.request.contextPath }/update/updateSeries?seriesName=${tbSeries.seriesName}">修改信息</a></td>
+        <a href="${pageContext.request.contextPath }/delete/deleteBySeriesName?seriesName=${tbSeries.seriesName}">删除</a>
     </tr>
     </c:forEach>
     <a href="${pageContext.request.contextPath }/add/addSe">添加车系页面</a>

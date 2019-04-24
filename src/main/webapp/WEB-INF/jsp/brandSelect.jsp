@@ -32,6 +32,7 @@
         <td>${tbBrand.enName }</td>
         <td><a href="${pageContext.request.contextPath }/select/selectByBrand_code?brandCode=${tbBrand.brandCode}">查看具体车系</a></td>
         <td><a href="${pageContext.request.contextPath }/update/updateBrand?brandName=${tbBrand.brandName}">修改信息</a></td>
+        <a href="${pageContext.request.contextPath }/delete/deleteByBrandName?brandName=${tbBrand.brandName}">删除</a>
     </tr>
     </c:forEach>
 

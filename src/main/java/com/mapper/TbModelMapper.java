@@ -32,4 +32,8 @@ public interface TbModelMapper {
 
     List<TbModel> searchAllModel();
     int updateModelSubmit(TbModel tbModel);
+
+    int deleteByModelName(String modelName);
+
+    int updateModelSeriesCode(@Param("modelName")String modelName, @Param("newSeriesCode")String newSeriesCode);
 }

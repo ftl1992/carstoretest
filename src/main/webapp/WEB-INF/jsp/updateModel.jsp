@@ -16,11 +16,15 @@
             document.modelForm.action="${pageContext.request.contextPath }/update/updateModelSubmit";
             document.modelForm.submit();
         }
+        function removeSeries(){
+            document.modelForm.action="${pageContext.request.contextPath }/remove/removeSeries";
+            document.modelForm.submit();
+        }
     </script>
 </head>
 <body>
 <form name="modelForm" method="post">
-品牌列表：
+车型列表：
 <table width="100%" border=1>
     <tr>
         <td>车型号</td>
@@ -47,9 +51,11 @@
         <td><input type="text" name="sellStatus" value="${tbModel.sellStatus }"/></td>
         <td><input type="text" name="isHidden" value="${tbModel.isHidden }"/></td>
         <td><input type="text" name="displayTag" value="${tbModel.displayTag }" /></td>
+        </td>
     </tr>
     </c:forEach>
     <td><input type="button" value="修改" onclick="updateModelSubmit()"> </td>
+    <td colspan="2" align="center"><input type="submit" value="迁移" onclick="removeSeries()"/>
     <a href="../index.jsp">返回主页</a>
     </form>
 </body>

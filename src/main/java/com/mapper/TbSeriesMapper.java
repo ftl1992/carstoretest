@@ -33,4 +33,6 @@ public interface TbSeriesMapper {
 
     List<TbSeries> searchAllSeries();
     int updateSeriesSubmit(TbSeries tbSeries);
+
+    int deleteBySeriesName(String seriesName);
 }

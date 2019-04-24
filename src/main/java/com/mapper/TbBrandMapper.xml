@@ -141,9 +141,9 @@
     from tb_brand
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByBrandName" parameterType="java.lang.String" >
     delete from tb_brand
-    where id = #{id,jdbcType=INTEGER}
+    where brand_name = #{brandName,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.po.TbBrandExample" >
     delete from tb_brand

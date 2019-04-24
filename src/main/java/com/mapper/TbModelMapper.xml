@@ -106,9 +106,9 @@
     from tb_model
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByModelName" parameterType="java.lang.String" >
     delete from tb_model
-    where id = #{id,jdbcType=INTEGER}
+    where model_name = #{modelName,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.po.TbModelExample" >
     delete from tb_model
@@ -355,5 +355,14 @@
       is_hidden = #{isHidden,jdbcType=BIT},
       display_tag = #{displayTag,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="updateModelSeriesCode"  >
+    update tb_model
+    set
+      series_code = #{newSeriesCode},
+      date_update =now()
+    where model_name = #{modelName}
   </update>
 </mapper>

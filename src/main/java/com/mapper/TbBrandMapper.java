@@ -41,4 +41,5 @@ public interface TbBrandMapper {
     int updateBrandSubmit(TbBrand tbBrand);
 
 
+    int deleteByBrandName(String brandName);
 }

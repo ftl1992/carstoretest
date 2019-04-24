@@ -3,6 +3,7 @@ package com.service.impl;
 import com.po.*;
 import com.service.Service;
 import com.mapper.*;
+import org.apache.ibatis.annotations.Param;
 import org.junit.runners.Parameterized;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -163,6 +164,26 @@ public class ServiceImpl implements Service {
 	public int updateModelSubmit(TbModel tbModel) {
 		return tbModelMapper.updateModelSubmit(tbModel);
 	}
+
+	@Override
+	public int deleteByModelName(String modelName) {
+		return tbModelMapper.deleteByModelName(modelName);
+	}
+
+	@Override
+	public int deleteByBrandName(String brandName) {
+		return tbBrandMapper.deleteByBrandName(brandName);
+	}
+
+	@Override
+	public int deleteBySeriesName(String seriesName) {
+		return tbSeriesMapper.deleteBySeriesName(seriesName);
+	}
+
+    @Override
+    public int updateModelSeriesCode(@Param("modelName") String modelName,@Param("newSeriesCode") String newSeriesCode) {
+        return tbModelMapper.updateModelSeriesCode(modelName,newSeriesCode);
+    }
 
 
 }

@@ -45,4 +45,10 @@ public interface Service {
 	int updateBrandSubmit(TbBrand tbBrand);
 	int updateSeriesSubmit(TbSeries tbSeries);
 	int updateModelSubmit(TbModel tbModel);
+
+	int deleteByModelName(String modelName);
+	int deleteByBrandName(String brandName);
+	int deleteBySeriesName(String seriesName);
+
+    int updateModelSeriesCode(String modelName,String newSeriesCode);
 }
