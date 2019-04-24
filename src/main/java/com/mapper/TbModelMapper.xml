@@ -93,6 +93,13 @@
       order by ${orderByClause}
     </if>
   </select>
+
+
+  <select id="searchAllModel"
+          resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" /> FROM tb_model
+
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -109,14 +116,14 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.po.TbModel" >
+  <insert id="addModel" parameterType="com.po.TbModel" >
     insert into tb_model (id, model_code, model_name, 
-      series_code, date_create, date_update, 
+      series_code, date_update,
       year, short_name, lead_pic, 
       sell_status, import_type, is_import, 
       is_hidden, display_tag)
     values (#{id,jdbcType=INTEGER}, #{modelCode,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, 
-      #{seriesCode,jdbcType=VARCHAR}, #{dateCreate,jdbcType=TIMESTAMP}, #{dateUpdate,jdbcType=TIMESTAMP}, 
+      #{seriesCode,jdbcType=VARCHAR}, now(),
       #{year,jdbcType=SMALLINT}, #{shortName,jdbcType=VARCHAR}, #{leadPic,jdbcType=VARCHAR}, 
       #{sellStatus,jdbcType=TINYINT}, #{importType,jdbcType=TINYINT}, #{isImport,jdbcType=BIT}, 
       #{isHidden,jdbcType=BIT}, #{displayTag,jdbcType=INTEGER})
@@ -333,13 +340,12 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.po.TbModel" >
+  <update id="updateModelSubmit" parameterType="com.po.TbModel" >
     update tb_model
     set model_code = #{modelCode,jdbcType=VARCHAR},
       model_name = #{modelName,jdbcType=VARCHAR},
       series_code = #{seriesCode,jdbcType=VARCHAR},
-      date_create = #{dateCreate,jdbcType=TIMESTAMP},
-      date_update = #{dateUpdate,jdbcType=TIMESTAMP},
+      date_update =now(),
       year = #{year,jdbcType=SMALLINT},
       short_name = #{shortName,jdbcType=VARCHAR},
       lead_pic = #{leadPic,jdbcType=VARCHAR},

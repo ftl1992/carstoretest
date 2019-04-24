@@ -21,6 +21,7 @@ public class ServiceImpl implements Service {
     @Autowired
 	private TbModelMapper tbModelMapper;
 
+
 	@Override
 	public List<TbBrand> findByBrandname( String brand_name) throws Exception {
 		return tbBrandMapper.findByBrandname(brand_name);
@@ -112,5 +113,56 @@ public class ServiceImpl implements Service {
 		criteria.andAliasNameLike("%"+alias_name+"%");
 		return tbBrandMapper.selectByExample(tbBrandExample);
 	}
+
+	@Override
+	public int addBrand(TbBrand tbBrand) {
+		return  tbBrandMapper.addBrand(tbBrand);
+
+
+	}
+
+	@Override
+	public List<TbBrand> searchAllBrand() {
+		return tbBrandMapper.searchAllBrand();
+	}
+
+
+
+	@Override
+	public int addSeries(TbSeries tbSeries) {
+		return  tbSeriesMapper.addSeries(tbSeries);
+
+
+	}
+
+	@Override
+	public List<TbSeries> searchAllSeries() {
+		return tbSeriesMapper.searchAllSeries();
+	}
+
+
+	@Override
+	public int addModel(TbModel tbModel) {
+		return tbModelMapper.addModel(tbModel);
+	}
+
+	@Override
+	public List<TbModel> searchAllModel() {
+		return tbModelMapper.searchAllModel();
+	}
+
+	@Override
+	public int updateBrandSubmit(TbBrand tbBrand) {
+		return tbBrandMapper.updateBrandSubmit(tbBrand);
+	}
+	@Override
+	public int updateSeriesSubmit(TbSeries tbSeries) {
+		return tbSeriesMapper.updateSeriesSubmit(tbSeries);
+	}
+	@Override
+	public int updateModelSubmit(TbModel tbModel) {
+		return tbModelMapper.updateModelSubmit(tbModel);
+	}
+
 
 }

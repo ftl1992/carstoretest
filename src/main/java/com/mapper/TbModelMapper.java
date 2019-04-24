@@ -27,4 +27,9 @@ public interface TbModelMapper {
     int updateByPrimaryKeySelective(TbModel record);
 
     int updateByPrimaryKey(TbModel record);
+
+    int addModel(TbModel tbModel);
+
+    List<TbModel> searchAllModel();
+    int updateModelSubmit(TbModel tbModel);
 }

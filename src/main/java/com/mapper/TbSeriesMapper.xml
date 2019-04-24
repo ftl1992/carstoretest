@@ -77,6 +77,15 @@
     id, series_code, series_name, brand_code, date_create, date_update, en_name, alias_name, 
     image_url, is_import, is_hidden, display_tag
   </sql>
+
+
+  <select id="searchAllSeries"
+          resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" /> FROM tb_series
+
+  </select>
+
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.po.TbSeriesExample" >
     select
     <if test="distinct" >
@@ -107,14 +116,14 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.po.TbSeries" >
+  <insert id="addSeries" parameterType="com.po.TbSeries" >
     insert into tb_series (id, series_code, series_name, 
-      brand_code, date_create, date_update, 
+      brand_code,date_update,
       en_name, alias_name, image_url, 
       is_import, is_hidden, display_tag
       )
     values (#{id,jdbcType=INTEGER}, #{seriesCode,jdbcType=VARCHAR}, #{seriesName,jdbcType=VARCHAR}, 
-      #{brandCode,jdbcType=VARCHAR}, #{dateCreate,jdbcType=TIMESTAMP}, #{dateUpdate,jdbcType=TIMESTAMP}, 
+      #{brandCode,jdbcType=VARCHAR}, now(),
       #{enName,jdbcType=VARCHAR}, #{aliasName,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
       #{isImport,jdbcType=BIT}, #{isHidden,jdbcType=BIT}, #{displayTag,jdbcType=INTEGER}
       )
@@ -305,13 +314,12 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.po.TbSeries" >
+  <update id="updateSeriesSubmit" parameterType="com.po.TbSeries" >
     update tb_series
     set series_code = #{seriesCode,jdbcType=VARCHAR},
       series_name = #{seriesName,jdbcType=VARCHAR},
       brand_code = #{brandCode,jdbcType=VARCHAR},
-      date_create = #{dateCreate,jdbcType=TIMESTAMP},
-      date_update = #{dateUpdate,jdbcType=TIMESTAMP},
+      date_update = now(),
       en_name = #{enName,jdbcType=VARCHAR},
       alias_name = #{aliasName,jdbcType=VARCHAR},
       image_url = #{imageUrl,jdbcType=VARCHAR},

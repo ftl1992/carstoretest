@@ -1,7 +1,9 @@
 package com.mapper;
 
+import com.po.BrandUpdateVo;
 import com.po.TbBrand;
 import com.po.TbBrandExample;
+import com.po.TbSeries;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -13,7 +15,6 @@ public interface TbBrandMapper {
 
     int deleteByPrimaryKey(Integer id);
 
-    int insert(TbBrand record);
 
     int insertSelective(TbBrand record);
 
@@ -32,5 +33,12 @@ public interface TbBrandMapper {
     int updateByPrimaryKeySelective(TbBrand record);
 
     int updateByPrimaryKey(TbBrand record);
+
+    List<TbBrand> searchAllBrand();
+
+    int addBrand(TbBrand tbBrand);
+
+    int updateBrandSubmit(TbBrand tbBrand);
+
 
 }

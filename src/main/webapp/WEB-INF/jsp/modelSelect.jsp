@@ -33,8 +33,10 @@
             <td>${tbModel.shortName }</td>
             <td>${tbModel.importType }</td>
             <td>${tbModel.isImport }</td>
+            <td><a href="${pageContext.request.contextPath }/update/updateModel?modelName=${tbModel.modelName}">修改信息</a></td>
         </tr>
         </c:forEach>
+        <a href="${pageContext.request.contextPath }/add/addMo">添加车型页面</a>
         <a href="../index.jsp">返回主页</a>
         </form>
 </body>

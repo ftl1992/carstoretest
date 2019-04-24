@@ -1,3 +1,4 @@
+<%--suppress ALL --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="UTF-8"%>
 <html lang="fan">
@@ -20,20 +21,31 @@
                 document.carForm.action="${pageContext.request.contextPath }/select/selectByModelname";
                 document.carForm.submit();
                 alert("成功");
+                return;
             }
+
             if(a(series_name.value)!=null && a(series_name.value)!=="")
             {
                 alert("成功");
                 document.carForm.action="${pageContext.request.contextPath }/select/selectBySeriesname";
                 document.carForm.submit();
-
+                return;
             }
+
             if( a(brand_name.value)!=null && a(brand_name.value)!=="")
             {
                 document.carForm.action="${pageContext.request.contextPath }/select/selectByBrandname";
                 document.carForm.submit();
                 alert("成功");
+                return;
             }
+            if ( brand_name.value=="" || brand_name.value==null){
+                document.carForm.action="${pageContext.request.contextPath }/select/searchAllBrand";
+                document.carForm.submit();
+                alert("成功");
+                return;
+            }
+
         }
 
     </script>
@@ -57,7 +69,6 @@
             <td colspan="2" align="center"><input type="submit" value="查询" onclick="ss()"/>
             </td>
         </tr>
-
     </table>
 </form>
 

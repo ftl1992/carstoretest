@@ -1,5 +1,6 @@
 package com.mapper;
 
+import com.po.TbBrand;
 import com.po.TbSeries;
 import com.po.TbSeriesExample;
 import java.util.List;
@@ -27,4 +28,9 @@ public interface TbSeriesMapper {
     int updateByPrimaryKeySelective(TbSeries record);
 
     int updateByPrimaryKey(TbSeries record);
+
+    int addSeries(TbSeries tbSeries);
+
+    List<TbSeries> searchAllSeries();
+    int updateSeriesSubmit(TbSeries tbSeries);
 }

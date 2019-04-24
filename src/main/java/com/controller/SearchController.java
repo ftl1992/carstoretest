@@ -25,6 +25,21 @@ public class SearchController {
 		@Autowired
 		private Service service=new ServiceImpl();
 
+
+
+	@RequestMapping("/searchAllBrand")
+	public ModelAndView searchAllBrand() throws Exception{
+
+		List<TbBrand> tbBrandList = (List<TbBrand>) service.searchAllBrand();
+		// ����ModelAndView
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.clear();
+		modelAndView.addObject("tbBrandList", tbBrandList);
+		modelAndView.setViewName("brandSelect");
+		return modelAndView;
+	}
+
+
 		@RequestMapping("/selectBySeriesname")
 		public ModelAndView selectBySeriesname( String series_name ) throws Exception{
 			System.out.print(series_name);

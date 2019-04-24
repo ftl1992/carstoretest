@@ -25,14 +25,17 @@
     </tr>
     <c:forEach items="${tbBrandList }" var="tbBrand">
     <tr>
-        <td><input type="checkbox" name="tbBrand" value="${tbBrand.id}"/></td>
+        <td>${tbBrand.id}</td>
         <td>${tbBrand.logoUrl }</td>
-        <td>${tbBrand.brandName }</td>
-        <td>${tbBrand.country }</td>
+        <td>${tbBrand.brandName}</td>
+        <td>${tbBrand.country}</td>
         <td>${tbBrand.enName }</td>
         <td><a href="${pageContext.request.contextPath }/select/selectByBrand_code?brandCode=${tbBrand.brandCode}">查看具体车系</a></td>
+        <td><a href="${pageContext.request.contextPath }/update/updateBrand?brandName=${tbBrand.brandName}">修改信息</a></td>
     </tr>
     </c:forEach>
+
+    <a href="${pageContext.request.contextPath }/add/addBr">添加品牌页面</a>
     <a href="../index.jsp">返回主页</a>
 </form>
 </body>
