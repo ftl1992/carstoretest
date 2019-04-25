@@ -185,5 +185,10 @@ public class ServiceImpl implements Service {
         return tbModelMapper.updateModelSeriesCode(modelName,newSeriesCode);
     }
 
+	@Override
+	public int updateSeriesBrandCode(@Param("seriesName") String seriesName, @Param("newBrandCode")String newBrandCode) {
+		return tbSeriesMapper.updateSeriesBrandCode(seriesName,newBrandCode);
+	}
+
 
 }

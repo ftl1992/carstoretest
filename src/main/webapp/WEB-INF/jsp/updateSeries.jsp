@@ -16,7 +16,10 @@
             document.seriesForm.action="${pageContext.request.contextPath }/update/updateSeriesSubmit";
             document.seriesForm.submit();
         }
-
+        function removeBrand(){
+            document.seriesForm.action="${pageContext.request.contextPath }/remove/removeBrand";
+            document.seriesForm.submit();
+        }
     </script>
 </head>
 <body>
@@ -48,6 +51,7 @@
         </tr>
         </c:forEach>
         <td><input type="button" value="修改" onclick="updateSeriesSubmit()"> </td>
+        <td colspan="2" align="center"><input type="submit" value="迁移" onclick="removeBrand()"/>
         <a href="../index.jsp">返回主页</a>
 </form>
 </body>

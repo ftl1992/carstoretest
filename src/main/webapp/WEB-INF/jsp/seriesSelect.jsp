@@ -22,6 +22,7 @@
         <td>选择</td>
         <td>车系图片：</td>
         <td>车系：</td>
+        <td>品牌编号：</td>
         <td>英文名：</td>
         <td>是否进口：</td>
         <td>操作：</td>
@@ -31,6 +32,7 @@
         <td><input type="checkbox" name="tbSeries_id" value="${tbSeries.id}"/></td>
         <td>${tbSeries.imageUrl }</td>
         <td>${tbSeries.seriesName }</td>
+        <td>${tbSeries.brandCode }</td>
         <td>${tbSeries.enName }</td>
         <td>${tbSeries.isImport }</td>
         <td><a href="${pageContext.request.contextPath }/select/selectBySeries_code?seriesCode=${tbSeries.seriesCode}">查看具体车型</a></td>

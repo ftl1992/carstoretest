@@ -51,4 +51,6 @@ public interface Service {
 	int deleteBySeriesName(String seriesName);
 
     int updateModelSeriesCode(String modelName,String newSeriesCode);
+
+    int updateSeriesBrandCode(String seriesName, String newBrandCode);
 }

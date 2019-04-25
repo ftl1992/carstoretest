@@ -328,4 +328,14 @@
       display_tag = #{displayTag,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
+  <update id="updateSeriesBrandCode"  >
+    update tb_series
+    set
+      brand_code = #{newBrandCode},
+      date_update =now()
+    where series_name = #{seriesName}
+  </update>
 </mapper>

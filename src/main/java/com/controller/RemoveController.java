@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.po.TbModel;
+import com.po.TbSeries;
 import com.service.Service;
 import com.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,40 @@ public class RemoveController {
             modelAndView.clear();
             modelAndView.addObject("tbModelList", tbModelList);
             modelAndView.setViewName("modelSelect");
+            return modelAndView;
+        }
+        else {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.clear();
+            modelAndView.setViewName("error");
+            return modelAndView;
+        }
+    }
+
+
+
+    @RequestMapping("/removeBrand")
+    public ModelAndView removeBrand(@RequestParam(value = "seriesName",required = true) String seriesName) throws Exception{
+        List<TbSeries> tbSeriesList = (List<TbSeries>) service.selectBySeriesname(seriesName);
+        // ����ModelAndView
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.clear();
+        modelAndView.addObject("tbSeriesList", tbSeriesList);
+        modelAndView.setViewName("seriesRemove");
+        return modelAndView;
+    }
+
+
+
+    @RequestMapping("/removeToBrand")
+    public ModelAndView removeToBrand(String seriesName,String newBrandCode) throws Exception{
+        int b =service.updateSeriesBrandCode(seriesName,newBrandCode);
+        if (b!=0){
+            List<TbSeries> tbSeriesList = (List<TbSeries>) service.searchAllSeries();
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.clear();
+            modelAndView.addObject("tbSeriesList", tbSeriesList);
+            modelAndView.setViewName("seriesSelect");
             return modelAndView;
         }
         else {

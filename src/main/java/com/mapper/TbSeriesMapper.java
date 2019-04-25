@@ -35,4 +35,6 @@ public interface TbSeriesMapper {
     int updateSeriesSubmit(TbSeries tbSeries);
 
     int deleteBySeriesName(String seriesName);
+
+    int updateSeriesBrandCode(@Param("seriesName")String seriesName,@Param("newBrandCode") String newBrandCode);
 }
