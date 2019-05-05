@@ -35,7 +35,6 @@
         <a href="${pageContext.request.contextPath }/delete/deleteByBrandName?brandName=${tbBrand.brandName}">删除</a>
     </tr>
     </c:forEach>
-
     <a href="${pageContext.request.contextPath }/add/addBr">添加品牌页面</a>
     <a href="../index.jsp">返回主页</a>
 </form>
